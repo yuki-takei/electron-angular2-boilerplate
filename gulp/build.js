@@ -141,11 +141,15 @@ gulp.task('serve', ['transpile:electron'], function () {
   //   conf.paths.src + '/**/*.scss'
   // ], ['inject:css']);
 
-  // watch electron src and retranspile
+  // watch electron src and re-transpile
   gulp.watch([conf.paths.appElectron + '/**/*.js'], ['transpile:electron']);
 
   // watch serve dir and restart electron
   gulp.watch([conf.paths.serve + '/**/*.js'], electron.restart);
+
+  // watch app src and reload electron
+  // gulp.watch([conf.paths.app + '/**/*.ts'], electron.reload);
+
   // gulp.watch([
   //   conf.paths.serve + '/styles/**/*.css',
   //   conf.paths.serve + '/renderer/**/*.html',

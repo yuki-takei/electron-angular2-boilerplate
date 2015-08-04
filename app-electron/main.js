@@ -26,12 +26,14 @@ app.on('ready', () => {
 
   //Menu.setApplicationMenu(appMenu);
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600
+    width: 1024,
+    height: 768
   });
   logger.info('loading url: ' + url);
   mainWindow.loadUrl(url);
-	mainWindow.on('closed', function () {
+  mainWindow.on('closed', function () {
 		mainWindow =  null;
 	});
+
+  // mainWindow.openDevTools();
 })
