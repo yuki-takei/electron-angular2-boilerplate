@@ -12,7 +12,6 @@ import Menu from 'menu';
 let mainWindow = null;
 if (process.env.NODE_ENV === 'development') {
   crashReporter.start();
-  //appMenu.append(devMenu);
 }
 
 app.on('window-all-closed', function() {

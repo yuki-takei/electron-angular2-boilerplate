@@ -123,7 +123,7 @@ gulp.task('serve', ['transpile:electron'], function () {
     pathToApp = 'file://app/index.html';
   }
   else if (process.env.NODE_ENV === 'development') {
-    pathToApp = path.relative(conf.paths.serve, conf.paths.app + '/index.html');
+    pathToApp = path.relative(conf.paths.serve, conf.paths.app + '/index.dev.html');
   }
 
   // set process.env
@@ -134,27 +134,19 @@ gulp.task('serve', ['transpile:electron'], function () {
   });
 
   var electron = electronServer.create();
-  electron.start(['testkey=testvalue']);
-  // gulp.watch([
-  //   'bower.json',
-  //   conf.paths.src + '/renderer/index.html',
-  //   conf.paths.src + '/**/*.scss'
-  // ], ['inject:css']);
+  electron.start();
 
   // watch electron src and re-transpile
-  gulp.watch([conf.paths.appElectron + '/**/*.js'], ['transpile:electron']);
-
+  // gulp.watch([conf.paths.appElectron + '/**/*.js'], ['transpile:electron']);
   // watch serve dir and restart electron
-  gulp.watch([conf.paths.serve + '/**/*.js'], electron.restart);
-
+  // gulp.watch([conf.paths.serve + '/**/*.js'], electron.restart);
   // watch app src and reload electron
-  // gulp.watch([conf.paths.app + '/**/*.ts'], electron.reload);
-
-  // gulp.watch([
-  //   conf.paths.serve + '/styles/**/*.css',
-  //   conf.paths.serve + '/renderer/**/*.html',
-  //   conf.paths.serve + '/renderer/**/*.js'
-  // ], electron.reload);
+  gulp.watch([
+    conf.paths.app + '/*.ts',
+    conf.paths.app + '/*.html',
+    conf.paths.app + '/!(jspm_packages)/*.ts',
+    // '!' + conf.paths.app + '/jspm_packages/**'
+  ], electron.reload);
 });
 
 // gulp.task('build', ['html', 'compile:scripts', 'packageJson', 'copy:fonts', 'assets']);
