@@ -1,0 +1,42 @@
+{
+  "name": "calc",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".tmp/serve/main.js",
+  "author": "Yuki Takei <yuki@weseek.co.jp>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "log4js": "~0.6.0"
+  },
+  "devDependencies": {
+    "babel": "~5.8.0",
+    "del": "~1.2.0",
+    "electron-connect": "~0.1.0",
+    "electron-packager": "~4.2.0",
+    "gulp": "~3.9.0",
+    "gulp-babel": "~5.2.0",
+    "gulp-env": "~0.2.0",
+    "gulp-load-plugins": "~0.10.0",
+    "gulp-plumber": "~1.0.0",
+    "gulp-sourcemaps": "~1.5.0",
+    "gulp-util": "~3.0.0",
+    "gulp-watch": "~4.3.0",
+    "jspm": "^0.16.0-beta.3",
+    "lodash": "~3.9.0",
+    "path": "~0.11.0",
+    "wrench": "~1.5.0"
+  },
+  "jspm": {
+    "directories": {
+      "baseURL": "app"
+    },
+    "dependencies": {
+      "angular2": "npm:angular2@^2.0.0-alpha.33"
+    },
+    "devDependencies": {
+      "css": "github:systemjs/plugin-css@^0.1.13",
+      "ts": "github:frankwallis/plugin-typescript@^2.0.4",
+      "typescript": "github:mhegazy/typescript@v1.5-beta2"
+    }
+  }
+}
