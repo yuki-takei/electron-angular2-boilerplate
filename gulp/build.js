@@ -137,9 +137,9 @@ gulp.task('serve', ['transpile:electron'], function () {
   electron.start();
 
   // watch electron src and re-transpile
-  // gulp.watch([conf.paths.appElectron + '/**/*.js'], ['transpile:electron']);
+  gulp.watch([conf.paths.appElectron + '/**/*.js'], ['transpile:electron']);
   // watch serve dir and restart electron
-  // gulp.watch([conf.paths.serve + '/**/*.js'], electron.restart);
+  gulp.watch([conf.paths.serve + '/**/*.js'], electron.restart);
   // watch app src and reload electron
   gulp.watch([
     conf.paths.app + '/*.ts',
