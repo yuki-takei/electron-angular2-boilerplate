@@ -1,5 +1,10 @@
+[![Dependency Status](https://david-dm.org/yuki-takei/electron-angular2-boilerplate
+.svg)](https://david-dm.org/alexweber/electron-angular2-boilerplate
+) [![devDependency Status](https://david-dm.org/yuki-takei/electron-angular2-boilerplate
+/dev-status.svg)](https://david-dm.org/yuki-takei/electron-angular2-boilerplate#info=devDependencies)
+
 electron-angular2-boilerplate
-===============================
+=============================
 
 Requirements
 ------------
