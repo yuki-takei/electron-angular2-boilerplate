@@ -13,9 +13,18 @@ Getting Started
 
 ## Install dependencies
 
+```
+$ cd /path/to/local_repos
+$ npm install -g gulp jspm
+$ npm install
+$ jspm install
+```
 
 ## Run at local
 
+```
+$ gulp serve
+```
 
 ## Release
 
