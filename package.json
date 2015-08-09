@@ -2,7 +2,6 @@
   "name": "calc",
   "version": "1.0.0",
   "description": "",
-  "main": ".tmp/serve/main.js",
   "author": "Yuki Takei <yuki@weseek.co.jp>",
   "license": "Apache-2.0",
   "dependencies": {

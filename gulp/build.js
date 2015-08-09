@@ -133,7 +133,9 @@ gulp.task('serve', ['transpile:electron'], function () {
     }
   });
 
-  var electron = electronServer.create();
+  var electron = electronServer.create({
+    path: conf.paths.serve + '/main.js'
+  });
   electron.start();
 
   // watch electron src and re-transpile
@@ -145,7 +147,6 @@ gulp.task('serve', ['transpile:electron'], function () {
     conf.paths.app + '/*.ts',
     conf.paths.app + '/*.html',
     conf.paths.app + '/!(jspm_packages)/*.ts',
-    // '!' + conf.paths.app + '/jspm_packages/**'
   ], electron.reload);
 });
 
