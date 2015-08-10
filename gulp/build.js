@@ -10,6 +10,20 @@ var del = require('del');
 // var mainBowerFiles = require('main-bower-files');
 var electronServer = require('electron-connect').server;
 
+
+/*
+ * Configuration
+ */
+var paths = {
+  indexFileDev: conf.paths.app + '/index.dev.html',
+  indexFileProd: conf.paths.app + '/index.html',
+  mainFileElectron: conf.paths.serve + '/main.js',
+  jspmBundleTargetModule: 'app.ts!',
+  jspmBundleOutFile: conf.paths.dist + '/bundle.js'
+}
+
+
+
 // Compile *.scss files with sourcemaps
 // gulp.task('compile:styles', function () {
 //   return gulp.src([conf.paths.src + '/styles/**/*.scss'])
@@ -123,7 +137,7 @@ gulp.task('serve', ['transpile:electron'], function () {
     pathToApp = 'file://app/index.html';
   }
   else if (process.env.NODE_ENV === 'development') {
-    pathToApp = path.relative(conf.paths.serve, conf.paths.app + '/index.dev.html');
+    pathToApp = path.relative(conf.paths.serve, paths.indexFileDev);
   }
 
   // set process.env
@@ -134,7 +148,7 @@ gulp.task('serve', ['transpile:electron'], function () {
   });
 
   var electron = electronServer.create({
-    path: conf.paths.serve + '/main.js'
+    path: paths.mainFileElectron
   });
   electron.start();
 
@@ -150,7 +164,12 @@ gulp.task('serve', ['transpile:electron'], function () {
   ], electron.reload);
 });
 
-// gulp.task('build', ['html', 'compile:scripts', 'packageJson', 'copy:fonts', 'assets']);
+gulp.task('bundle:sfx', $.shell.task([
+  'jspm bundle-sfx ' + paths.jspmBundleTargetModule + ' ' + paths.jspmBundleOutFile
+]));
+
+gulp.task('build', ['transpile:electron', 'bundle:sfx'], function () {
+});
 
 // gulp.task('serve:dist', ['build'], function () {
 //   electronServer.create({path: conf.paths.dist}).start();

@@ -17,6 +17,7 @@
     "gulp-env": "~0.2.0",
     "gulp-load-plugins": "~0.10.0",
     "gulp-plumber": "~1.0.0",
+    "gulp-shell": "~0.4.0",
     "gulp-sourcemaps": "~1.5.0",
     "gulp-util": "~3.0.0",
     "gulp-watch": "~4.3.0",
