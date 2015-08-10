@@ -1,16 +1,17 @@
 System.config({
-  "baseURL": "./",
-  "defaultJSExtensions": true,
-  "transpiler": "typescript",
-  "typescriptOptions": {
+  baseURL: "./",
+  defaultJSExtensions: true,
+  transpiler: "typescript",
+  typescriptOptions: {
     "noImplicitAny": false,
     "typeCheck": true
   },
-  "paths": {
+  paths: {
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
-  "packages": {
+
+  packages: {
     "app": {
       "defaultExtension": "ts",
       "meta": {
@@ -22,17 +23,15 @@ System.config({
         }
       }
     }
-  }
-});
+  },
 
-System.config({
-  "map": {
+  map: {
     "angular2": "npm:angular2@2.0.0-alpha.33",
     "css": "github:systemjs/plugin-css@0.1.13",
     "es6-shim": "github:es-shims/es6-shim@0.33.0",
     "reflect-metadata": "npm:reflect-metadata@0.1.0",
     "ts": "github:frankwallis/plugin-typescript@2.0.4",
-    "typescript": "github:mhegazy/typescript@v1.5-beta2",
+    "typescript": "npm:typescript@1.5.3",
     "github:frankwallis/plugin-typescript@2.0.4": {
       "typescript": "npm:typescript@1.5.3"
     },
@@ -116,4 +115,3 @@ System.config({
     }
   }
 });
-
