@@ -16,8 +16,7 @@ var electronServer = require('electron-connect').server;
  */
 var paths = {
   indexFileDev: conf.paths.app + '/index.dev.html',
-  indexFileProd: conf.paths.app + '/index.html',
-  mainFileElectron: conf.paths.serve + '/main.js',
+  indexFile: conf.paths.app + '/index.html',
   jspmBundleTargetModule: 'app.ts!',
   jspmBundleOutFile: conf.paths.dist + '/bundle.js'
 }
@@ -131,24 +130,14 @@ gulp.task('clean', function (done) {
 // gulp.task('serve', ['inject:css', 'compile:scripts:watch', 'assets'], function () {
 gulp.task('serve', ['transpile:electron'], function () {
   // switch the pathToApp for BrowserWindow.loadUrl(url) according to the value of NODE_ENV
-  var pathToApp;
-  if (process.env.NODE_ENV === 'production') {
-    // overwrite
-    pathToApp = 'file://app/index.html';
-  }
-  else if (process.env.NODE_ENV === 'development') {
-    pathToApp = path.relative(conf.paths.serve, paths.indexFileDev);
-  }
-
-  // set process.env
   $.env({
     vars: {
-      APP_RELATIVE_PATH: pathToApp
+      APP_RELATIVE_PATH: path.relative(conf.paths.serve, paths.indexFileDev)
     }
   });
 
   var electron = electronServer.create({
-    path: paths.mainFileElectron
+    path: conf.paths.serve + "/main.js"
   });
   electron.start();
 
@@ -164,13 +153,27 @@ gulp.task('serve', ['transpile:electron'], function () {
   ], electron.reload);
 });
 
-gulp.task('bundle:sfx', $.shell.task([
+gulp.task('build:bundle:sfx', $.shell.task([
   'jspm bundle-sfx ' + paths.jspmBundleTargetModule + ' ' + paths.jspmBundleOutFile
 ]));
 
-gulp.task('build', ['transpile:electron', 'bundle:sfx'], function () {
+gulp.task('build', ['transpile:electron', 'build:bundle:sfx'], function () {
+  gulp.src([
+    paths.indexFile,
+    conf.paths.serve + "/*.js"
+  ])
+    .pipe(gulp.dest(conf.paths.dist))
 });
 
-// gulp.task('serve:dist', ['build'], function () {
-//   electronServer.create({path: conf.paths.dist}).start();
-// });
+gulp.task('serve:dist', ['build'], function () {
+  // switch the pathToApp for BrowserWindow.loadUrl(url) according to the value of NODE_ENV
+  $.env({
+    vars: {
+      APP_RELATIVE_PATH: path.relative(conf.paths.dist, conf.paths.dist + "/index.html")
+    }
+  });
+
+  electronServer.create({
+    path: conf.paths.dist + "/main.js"
+  }).start();
+});
