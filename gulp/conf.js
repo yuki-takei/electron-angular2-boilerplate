@@ -9,7 +9,8 @@ exports.paths = {
   app: 'app',
   appElectron: 'app-electron',
   serve: '.tmp/serve',
-  dist: '.tmp/dist'
+  dist: '.tmp/dist',
+  release: '.tmp/release'
 };
 
 /**

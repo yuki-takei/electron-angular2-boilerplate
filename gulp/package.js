@@ -7,7 +7,7 @@ var conf = require('./conf');
 var path = require('path');
 //
 // var fs = require('fs');
-// var packager = require('electron-packager');
+var packager = require('electron-packager');
 // var merge = require('merge2');
 // var browserify = require('browserify');
 // var source = require('vinyl-source-stream');
