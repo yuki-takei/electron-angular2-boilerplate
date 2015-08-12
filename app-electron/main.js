@@ -21,7 +21,10 @@ app.on('window-all-closed', function() {
 });
 
 app.on('ready', () => {
-  let url = 'file://' + __dirname + '/' + process.env.APP_RELATIVE_PATH;
+  let url = 'file://' + __dirname + '/index.html';
+  if ('APP_RELATIVE_PATH' in process.env) {
+    url = 'file://' + __dirname + '/' + process.env.APP_RELATIVE_PATH;
+  }
 
   //Menu.setApplicationMenu(appMenu);
   mainWindow = new BrowserWindow({

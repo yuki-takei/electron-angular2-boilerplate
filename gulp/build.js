@@ -166,13 +166,6 @@ gulp.task('build', ['transpile:electron', 'build:bundle:sfx'], function () {
 });
 
 gulp.task('serve:dist', ['build'], function () {
-  // switch the pathToApp for BrowserWindow.loadUrl(url) according to the value of NODE_ENV
-  $.env({
-    vars: {
-      APP_RELATIVE_PATH: path.relative(conf.paths.dist, conf.paths.dist + "/index.html")
-    }
-  });
-
   electronServer.create({
     path: conf.paths.dist + "/main.js"
   }).start();

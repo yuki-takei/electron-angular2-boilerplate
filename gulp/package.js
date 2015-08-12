@@ -1,10 +1,10 @@
-// 'use strict';
-//
-// var gulp = require('gulp');
-// var $ = require('gulp-load-plugins')();
-// var _ = require('lodash');
-// var conf = require('./conf');
-// var path = require('path');
+'use strict';
+
+var gulp = require('gulp');
+var $ = require('gulp-load-plugins')();
+var _ = require('lodash');
+var conf = require('./conf');
+var path = require('path');
 //
 // var fs = require('fs');
 // var packager = require('electron-packager');
@@ -79,20 +79,20 @@
 //   });
 // });
 //
-// // Package for each platforms
-// gulp.task('package', ['win32', 'darwin', 'linux'].map(function (platform) {
-//   var taskName = 'package:' + platform;
-//   gulp.task(taskName, ['build'], function (done) {
-//     packager({
-//       dir: conf.paths.dist,
-//       name: 'ElectronApp',
-//       arch: 'x64',
-//       platform: platform,
-//       out: conf.paths.release + '/' + platform,
-//       version: '0.28.1'
-//     }, function (err) {
-//       done();
-//     });
-//   });
-//   return taskName;
-// }));
+// Package for each platforms
+gulp.task('package', ['win32', 'darwin', 'linux'].map(function (platform) {
+  var taskName = 'package:' + platform;
+  gulp.task(taskName, ['build'], function (done) {
+    packager({
+      dir: conf.paths.dist,
+      name: 'ElectronApp',
+      arch: 'x64',
+      platform: platform,
+      out: conf.paths.release + '/' + platform,
+      version: '0.30.2'
+    }, function (err) {
+      done();
+    });
+  });
+  return taskName;
+}));
