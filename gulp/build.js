@@ -5,10 +5,12 @@ var $ = require('gulp-load-plugins')();
 var _ = require('lodash');
 var conf = require('./conf');
 var path = require('path');
-
 var del = require('del');
-// var mainBowerFiles = require('main-bower-files');
+var fs = require('fs');
+
 var electronServer = require('electron-connect').server;
+
+var packageJson = require('../package.json');
 
 
 /*
@@ -153,11 +155,21 @@ gulp.task('serve', ['transpile:electron'], function () {
   ], electron.reload);
 });
 
+
+// Write a package.json for distribution
+gulp.task('build:packageJson', [], function (done) {
+  var json = _.cloneDeep(packageJson);
+  json.main = conf.files.appElectronMain;
+  fs.writeFile(conf.paths.dist + '/package.json', JSON.stringify(json), function (err) {
+    done();
+  });
+});
+
 gulp.task('build:bundle:sfx', $.shell.task([
   'jspm bundle-sfx ' + paths.jspmBundleTargetModule + ' ' + paths.jspmBundleOutFile
 ]));
 
-gulp.task('build', ['transpile:electron', 'build:bundle:sfx'], function () {
+gulp.task('build', ['transpile:electron', 'build:bundle:sfx', 'build:packageJson'], function () {
   gulp.src([
     paths.indexFile,
     conf.paths.serve + "/*.js"
