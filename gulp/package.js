@@ -6,13 +6,13 @@ var _ = require('lodash');
 var conf = require('./conf');
 var path = require('path');
 //
-// var fs = require('fs');
+var fs = require('fs');
 var packager = require('electron-packager');
 // var merge = require('merge2');
 // var browserify = require('browserify');
 // var source = require('vinyl-source-stream');
 // var buffer = require('vinyl-buffer');
-// var packageJson = require('../package.json');
+var packageJson = require('../package.json');
 //
 //
 // // Minify dependent modules.
@@ -70,15 +70,15 @@ var packager = require('electron-packager');
 //   return merge(streams);
 // });
 //
-// // Write a package.json for distribution
-// gulp.task('packageJson', ['bundle:dependencies'], function (done) {
-//   var json = _.cloneDeep(packageJson);
-//   json.main = 'app.js';
-//   fs.writeFile(conf.paths.dist + '/package.json', JSON.stringify(json), function (err) {
-//     done();
-//   });
-// });
-//
+// Write a package.json for distribution
+gulp.task('packageJson', [], function (done) {
+  var json = _.cloneDeep(packageJson);
+  json.main = 'main.js';
+  fs.writeFile(conf.paths.dist + '/package.json', JSON.stringify(json), function (err) {
+    done();
+  });
+});
+
 // Package for each platforms
 gulp.task('package', ['win32', 'darwin', 'linux'].map(function (platform) {
   var taskName = 'package:' + platform;
