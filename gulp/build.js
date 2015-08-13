@@ -122,7 +122,7 @@ gulp.task('transpile:electron', function () {
 
 // Delete generated directories.
 gulp.task('clean', function (done) {
-  del([conf.paths.tmp], function () {
+  del([conf.paths.tmp, conf.paths.release], function () {
     done();
   });
 });

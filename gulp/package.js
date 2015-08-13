@@ -73,7 +73,7 @@ var packageJson = require('../package.json');
 // Write a package.json for distribution
 gulp.task('packageJson', [], function (done) {
   var json = _.cloneDeep(packageJson);
-  json.main = 'main.js';
+  json.main = conf.files.appElectronMain;
   fs.writeFile(conf.paths.dist + '/package.json', JSON.stringify(json), function (err) {
     done();
   });
@@ -82,14 +82,14 @@ gulp.task('packageJson', [], function (done) {
 // Package for each platforms
 gulp.task('package', ['win32', 'darwin', 'linux'].map(function (platform) {
   var taskName = 'package:' + platform;
-  gulp.task(taskName, ['build'], function (done) {
+  gulp.task(taskName, ['build', 'packageJson'], function (done) {
     packager({
       dir: conf.paths.dist,
-      name: 'ElectronApp',
+      name: packageJson.name,
       arch: 'x64',
       platform: platform,
       out: conf.paths.release + '/' + platform,
-      version: '0.30.2'
+      version: conf.meta.electronVersion
     }, function (err) {
       done();
     });
