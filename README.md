@@ -6,6 +6,8 @@
 electron-angular2-boilerplate
 =============================
 
+*!! This Project is under constructing !!*
+
 Requirements
 ------------
 
