@@ -32,7 +32,9 @@
     },
     "dependencies": {
       "angular2": "npm:angular2@^2.0.0-alpha.33",
+      "angular-material": "github:angular/bower-material@^0.10.1",
       "es6-shim": "github:es-shims/es6-shim@^0.33.0",
+      "less": "github:aaike/jspm-less-plugin@^0.0.5",
       "reflect-metadata": "npm:reflect-metadata@^0.1.0"
     },
     "devDependencies": {

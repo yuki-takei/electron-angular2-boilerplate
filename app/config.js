@@ -22,11 +22,28 @@ System.config({
   },
 
   map: {
+    "angular-material": "github:angular/bower-material@0.10.1",
     "angular2": "npm:angular2@2.0.0-alpha.33",
     "css": "github:systemjs/plugin-css@0.1.13",
     "es6-shim": "github:es-shims/es6-shim@0.33.0",
+    "less": "github:aaike/jspm-less-plugin@0.0.5",
     "reflect-metadata": "npm:reflect-metadata@0.1.0",
     "typescript": "npm:typescript@1.6.0-dev.20150818",
+    "github:aaike/jspm-less-plugin@0.0.5": {
+      "less.js": "github:distros/less@2.4.0"
+    },
+    "github:angular/bower-angular-animate@1.4.4": {
+      "angular": "github:angular/bower-angular@1.4.4"
+    },
+    "github:angular/bower-angular-aria@1.4.4": {
+      "angular": "github:angular/bower-angular@1.4.4"
+    },
+    "github:angular/bower-material@0.10.1": {
+      "angular": "github:angular/bower-angular@1.4.4",
+      "angular-animate": "github:angular/bower-angular-animate@1.4.4",
+      "angular-aria": "github:angular/bower-angular-aria@1.4.4",
+      "css": "github:systemjs/plugin-css@0.1.13"
+    },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
