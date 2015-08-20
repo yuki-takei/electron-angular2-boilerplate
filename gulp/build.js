@@ -151,6 +151,7 @@ gulp.task('serve', ['transpile:electron'], function () {
   gulp.watch([
     conf.paths.app + '/*.ts',
     conf.paths.app + '/*.html',
+    conf.paths.app + '/*.less',
     conf.paths.app + '/!(jspm_packages)/*.ts',
   ], electron.reload);
 });

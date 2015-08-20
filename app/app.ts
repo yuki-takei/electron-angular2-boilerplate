@@ -3,20 +3,22 @@ import 'es6-shim';
 import 'less';
 
 import {Component, View, bootstrap} from 'angular2/angular2';
-import 'angular-material';
+
+import 'bootstrap';
+import 'bootstrap/css/bootstrap.css!';
 
 // Annotation section
 @Component({
   selector: 'my-app'
 })
 @View({
-  template: '<h1>Hello {{ name }}</h1>'
+  templateUrl: 'app.html'
 })
 // Component controller
 class MyAppComponent {
-  name: string;
+  greeting: string;
   constructor() {
-    this.name = 'Alice';
+    this.greeting = 'Hello! World!';
   }
 }
 
