@@ -4,8 +4,8 @@ import 'less';
 
 import {Component, View, bootstrap} from 'angular2/angular2';
 
-// import 'bootstrap';
-// import 'bootstrap/css/bootstrap.css!';
+import 'bootstrap';
+import 'bootstrap/css/bootstrap.css!';
 
 // Annotation section
 @Component({
