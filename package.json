@@ -26,8 +26,9 @@
     "wrench": "~1.5.0"
   },
   "jspm": {
+    "configFile": "src/jspm.config.js",
     "directories": {
-      "baseURL": "app"
+      "baseURL": "src"
     },
     "dependencies": {
       "angular2": "npm:angular2@^2.0.0-alpha.35",

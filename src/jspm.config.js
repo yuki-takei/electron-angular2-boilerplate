@@ -15,6 +15,7 @@ System.config({
 
   packages: {
     "app": {
+      "main": "app",
       "defaultExtension": "ts",
       "meta": {
         "*.css": {

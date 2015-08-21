@@ -17,9 +17,9 @@ var packageJson = require('../package.json');
  * Configuration
  */
 var paths = {
-  indexFileDev: conf.paths.app + '/index.dev.html',
-  indexFile: conf.paths.app + '/index.html',
-  jspmBundleTargetModule: conf.paths.app + '/app',
+  indexFileDev: conf.paths.src + '/index.dev.html',
+  indexFile: conf.paths.src + '/index.html',
+  jspmBundleTargetModule: 'app',
   jspmBundleOutFile: conf.paths.dist + '/bundle.js'
 }
 
@@ -86,7 +86,7 @@ var paths = {
 
 // Compile scripts for distribution
 gulp.task('transpile:electron', function () {
-  return gulp.src(conf.paths.appElectron + "/**/*.js")
+  return gulp.src(conf.paths.srcElectron + "/**/*.js")
     .pipe($.plumber(conf.errorHandler))
     .pipe($.sourcemaps.init())
     .pipe($.babel({stage: 2}))
@@ -144,15 +144,15 @@ gulp.task('serve', ['transpile:electron'], function () {
   electron.start();
 
   // watch electron src and re-transpile
-  gulp.watch([conf.paths.appElectron + '/**/*.js'], ['transpile:electron']);
+  gulp.watch([conf.paths.srcElectron + '/**/*.js'], ['transpile:electron']);
   // watch serve dir and restart electron
   gulp.watch([conf.paths.serve + '/**/*.js'], electron.restart);
   // watch app src and reload electron
   gulp.watch([
-    conf.paths.app + '/*.ts',
-    conf.paths.app + '/*.html',
-    conf.paths.app + '/*.less',
-    conf.paths.app + '/!(jspm_packages)/*.ts',
+    conf.paths.src + '/*.ts',
+    conf.paths.src + '/*.html',
+    conf.paths.src + '/*.less',
+    conf.paths.src + '/!(jspm_packages)/*.ts',
   ], electron.reload);
 });
 
@@ -160,7 +160,7 @@ gulp.task('serve', ['transpile:electron'], function () {
 // Write a package.json for distribution
 gulp.task('build:packageJson', [], function (done) {
   var json = _.cloneDeep(packageJson);
-  json.main = conf.files.appElectronMain;
+  json.main = conf.files.electronMain;
   fs.writeFile(conf.paths.dist + '/package.json', JSON.stringify(json), function (err) {
     done();
   });

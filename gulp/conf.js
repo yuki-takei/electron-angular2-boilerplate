@@ -7,15 +7,15 @@ exports.meta = {
 }
 
 exports.paths = {
-  app: 'app',
-  appElectron: 'app-electron',
+  src: 'src',
+  srcElectron: 'src-electron',
   serve: '.tmp/serve',
   dist: '.tmp/dist',
   release: 'release'
 };
 
 exports.files = {
-  appElectronMain: 'main.js'
+  electronMain: 'main.js'
 }
 
 /**

@@ -13,7 +13,7 @@ import 'bootstrap/css/bootstrap.css!';
   selector: 'my-app'
 })
 @View({
-  templateUrl: 'app.html'
+  templateUrl: 'app/app.html'
 })
 // Component controller
 class MyAppComponent {
