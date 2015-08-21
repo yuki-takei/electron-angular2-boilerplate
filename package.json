@@ -21,7 +21,6 @@
     "gulp-sourcemaps": "~1.5.0",
     "gulp-util": "~3.0.0",
     "gulp-watch": "~4.3.0",
-    "jspm": "^0.16.0",
     "lodash": "^3.10.0",
     "path": "~0.11.0",
     "wrench": "~1.5.0"
@@ -35,13 +34,13 @@
       "bootstrap": "github:twbs/bootstrap@^3.3.5",
       "es6-shim": "github:es-shims/es6-shim@^0.33.0",
       "less": "github:aaike/jspm-less-plugin@^0.0.5",
-      "reflect-metadata": "npm:reflect-metadata@^0.1.0"
+      "reflect-metadata": "npm:reflect-metadata@^0.1.0",
+      "zone.js": "npm:zone.js@^0.5.2"
     },
     "devDependencies": {
       "clean-css": "npm:clean-css@^3.3.9",
       "css": "github:systemjs/plugin-css@^0.1.13",
-      "ts": "github:frankwallis/plugin-typescript@^2.0.4",
-      "typescript": "npm:typescript@^1.6.0-dev.20150818"
+      "typescript": "npm:typescript@^1.6.0-dev.20150821"
     }
   }
 }
