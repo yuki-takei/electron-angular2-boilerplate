@@ -7,6 +7,7 @@ var conf = require('./conf');
 var path = require('path');
 var del = require('del');
 var fs = require('fs');
+var uglifySaveLicense = require('uglify-save-license');
 
 var electronServer = require('electron-connect').server;
 
@@ -170,13 +171,36 @@ gulp.task('build:bundle:sfx', $.shell.task([
   'jspm bundle-sfx ' + paths.jspmBundleTargetModule + ' ' + paths.jspmBundleOutFile + ' --skip-source-maps --minify'
 ]));
 
-gulp.task('build', ['transpile:electron', 'build:bundle:sfx', 'build:packageJson'], function () {
-  gulp.src([
-    paths.indexFile,
-    conf.paths.serve + "/*.js"
+gulp.task('build:html', function() {
+  return gulp.src([
+    // select all html files
+    conf.paths.src + "/**/*.html",
+    // exclude
+    "!" + paths.indexFileDev
   ])
-    .pipe(gulp.dest(conf.paths.dist))
+    .pipe($.minifyHtml({
+      empty: true,
+      spare: true,
+      quotes: true,
+      conditionals: true
+    }))
+    .pipe(gulp.dest(conf.paths.dist));
 });
+
+gulp.task('build:electron', ['transpile:electron'], function() {
+  return gulp.src([
+    conf.paths.serve + "/**/*.js"
+  ])
+    .pipe($.uglify({ preserveComments: uglifySaveLicense }))
+    .pipe(gulp.dest(conf.paths.dist));
+});
+
+gulp.task('build', [
+  'build:html',
+  'build:electron',
+  'build:bundle:sfx',
+  'build:packageJson'
+]);
 
 gulp.task('serve:dist', ['build'], function () {
   electronServer.create({
