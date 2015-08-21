@@ -19,7 +19,7 @@ var packageJson = require('../package.json');
 var paths = {
   indexFileDev: conf.paths.app + '/index.dev.html',
   indexFile: conf.paths.app + '/index.html',
-  jspmBundleTargetModule: 'app.ts!',
+  jspmBundleTargetModule: conf.paths.app + '/app',
   jspmBundleOutFile: conf.paths.dist + '/bundle.js'
 }
 
@@ -167,7 +167,7 @@ gulp.task('build:packageJson', [], function (done) {
 });
 
 gulp.task('build:bundle:sfx', $.shell.task([
-  'jspm bundle-sfx ' + paths.jspmBundleTargetModule + ' ' + paths.jspmBundleOutFile
+  'jspm bundle-sfx ' + paths.jspmBundleTargetModule + ' ' + paths.jspmBundleOutFile + ' --skip-source-maps --minify'
 ]));
 
 gulp.task('build', ['transpile:electron', 'build:bundle:sfx', 'build:packageJson'], function () {

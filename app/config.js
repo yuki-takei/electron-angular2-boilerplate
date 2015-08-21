@@ -3,6 +3,8 @@ System.config({
   defaultJSExtensions: true,
   transpiler: "typescript",
   typescriptOptions: {
+    "module":"commonjs",
+    "emitDecoratorMetadata": true,
     "noImplicitAny": false
   },
   paths: {
@@ -15,9 +17,6 @@ System.config({
     "app": {
       "defaultExtension": "ts",
       "meta": {
-        "*.ts": {
-          "loader": "ts"
-        },
         "*.css": {
           "loader": "css"
         }
@@ -30,16 +29,13 @@ System.config({
     "bootstrap": "github:twbs/bootstrap@3.3.5",
     "clean-css": "npm:clean-css@3.3.9",
     "css": "github:systemjs/plugin-css@0.1.13",
-    "es6-shim": "github:es-shims/es6-shim@0.33.0",
+    "es6-shim": "github:es-shims/es6-shim@0.33.1",
     "less": "github:aaike/jspm-less-plugin@0.0.5",
     "reflect-metadata": "npm:reflect-metadata@0.1.0",
-    "ts": "github:frankwallis/plugin-typescript@2.0.4",
-    "typescript": "npm:typescript@1.6.0-dev.20150820",
+    "typescript": "npm:typescript@1.6.0-dev.20150821",
+    "zone.js": "npm:zone.js@0.5.2",
     "github:aaike/jspm-less-plugin@0.0.5": {
       "less.js": "github:distros/less@2.4.0"
-    },
-    "github:frankwallis/plugin-typescript@2.0.4": {
-      "typescript": "npm:typescript@1.5.3"
     },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
@@ -326,16 +322,7 @@ System.config({
     "npm:string_decoder@0.10.31": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
-    "npm:typescript@1.5.3": {
-      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "os": "github:jspm/nodelibs-os@0.1.0",
-      "path": "github:jspm/nodelibs-path@0.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.1",
-      "readline": "github:jspm/nodelibs-readline@0.1.0"
-    },
-    "npm:typescript@1.6.0-dev.20150820": {
+    "npm:typescript@1.6.0-dev.20150821": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
