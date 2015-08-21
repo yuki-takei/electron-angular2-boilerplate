@@ -25,66 +25,6 @@ var paths = {
 }
 
 
-
-// Compile *.scss files with sourcemaps
-// gulp.task('compile:styles', function () {
-//   return gulp.src([conf.paths.src + '/styles/**/*.scss'])
-//     .pipe($.plumber(conf.errorHandler))
-//     .pipe($.sourcemaps.init())
-//     .pipe($.sass())
-//     .pipe($.sourcemaps.write('.'))
-//     .pipe(gulp.dest(conf.paths.serve + '/styles'))
-//     ;
-// });
-
-// Inject *.css(compiled and depedent) files into *.html
-// gulp.task('inject:css', ['compile:styles'], function() {
-//   var injectOptions = {
-//     ignorePath: [conf.paths.src, conf.paths.serve],
-//     addPrefix: '..',
-//     addRootSlash: false
-//   };
-//
-//   return gulp.src(conf.paths.src + '/**/*.html')
-//     .pipe($.plumber(conf.errorHandler))
-//     .pipe($.inject(
-//         gulp.src(mainBowerFiles()
-//           .concat([conf.paths.serve + '/styles/**/*.css'])),
-//         injectOptions))
-//     .pipe(gulp.dest(conf.paths.serve))
-//   ;
-// });
-
-// Copy assets
-// gulp.task('assets', function () {
-//   return gulp.src(conf.paths.src + '/assets/**/*')
-//     .pipe(gulp.dest(conf.paths.serve + '/assets'))
-//     .pipe(gulp.dest(conf.paths.dist + '/assets'))
-//   ;
-// });
-
-// Incremental compile ES6, JSX files with sourcemaps
-// gulp.task('compile:scripts:watch', function (done) {
-//   gulp.src('src/**/*.{js,jsx}')
-//     .pipe($.watch('src/**/*.{js,jsx}', {verbose: true}))
-//     .pipe($.plumber(conf.errorHandler))
-//     .pipe($.sourcemaps.init())
-//     .pipe($.babel({stage: 0}))
-//     .pipe($.sourcemaps.write('.'))
-//     .pipe(gulp.dest(conf.paths.serve))
-//   ;
-//   done();
-// });
-
-// Compile scripts for distribution
-// gulp.task('compile:scripts', function () {
-//   return gulp.src('src/**/*.{js,jsx}')
-//     .pipe($.babel({stage: 0}))
-//     .pipe($.uglify())
-//     .pipe(gulp.dest(conf.paths.dist))
-//   ;
-// });
-
 // Compile scripts for distribution
 gulp.task('transpile:electron', function () {
   return gulp.src(conf.paths.srcElectron + "/**/*.js")
@@ -95,24 +35,6 @@ gulp.task('transpile:electron', function () {
     .pipe(gulp.dest(conf.paths.serve))
   ;
 });
-
-// Make HTML and concats CSS files.
-// gulp.task('html', ['inject:css'], function () {
-//   var assets = $.useref.assets({
-//     searchPath: [
-//       'bower_components',
-//       conf.paths.serve + '/styles'
-//     ]
-//   });
-//
-//   return gulp.src(conf.paths.serve + '/renderer/**/*.html')
-//     .pipe(assets)
-//     .pipe($.if('*.css', $.minifyCss()))
-//     .pipe(assets.restore())
-//     .pipe($.useref())
-//     .pipe(gulp.dest(conf.paths.dist + '/renderer'))
-//   ;
-// });
 
 // Copy fonts file. You don't need to copy *.ttf nor *.svg nor *.otf.
 // gulp.task('copy:fonts', function () {
@@ -130,7 +52,6 @@ gulp.task('clean', function (done) {
   });
 });
 
-// gulp.task('serve', ['inject:css', 'compile:scripts:watch', 'assets'], function () {
 gulp.task('serve', ['transpile:electron'], function () {
   // switch the pathToApp for BrowserWindow.loadUrl(url) according to the value of NODE_ENV
   $.env({
