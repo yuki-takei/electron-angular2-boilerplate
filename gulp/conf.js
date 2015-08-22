@@ -3,7 +3,7 @@
 var $ = require('gulp-load-plugins')();
 
 exports.meta = {
-  electronVersion: '0.30.2'
+  electronVersion: '0.30.5'
 }
 
 exports.paths = {
