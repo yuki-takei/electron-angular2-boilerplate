@@ -26,8 +26,23 @@ gulp.task('serve:dist', ['build'], function() {
     .pipe($.webserver({
       host: '0.0.0.0',
       port: 3000,
+      livereload: true,
       open: 'http://localhost:3000/'
     }));
+
+  // watch app src and rebuild
+  gulp.watch([
+    conf.paths.src + '/*.ts',
+    conf.paths.src + '/!(jspm_packages)/**/*.ts'
+  ], ['build:bundle:sfx']);
+  gulp.watch([
+    conf.paths.src + '/*.html',
+    conf.paths.src + '/!(jspm_packages)/**/*.html'
+  ], ['build:html']);
+  gulp.watch([
+    conf.paths.src + '/*.less',
+    conf.paths.src + '/!(jspm_packages)/**/*.less'
+  ], ['build:style']);
 });
 
 gulp.task('serve:electron', ['transpile:electron'], function () {
