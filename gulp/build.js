@@ -66,7 +66,9 @@ gulp.task('serve', ['transpile:electron'], function () {
     conf.paths.src + '/*.ts',
     conf.paths.src + '/*.html',
     conf.paths.src + '/*.less',
-    conf.paths.src + '/!(jspm_packages)/*.ts',
+    conf.paths.src + '/!(jspm_packages)/**/*.ts',
+    conf.paths.src + '/!(jspm_packages)/**/*.html',
+    conf.paths.src + '/!(jspm_packages)/**/*.less',
   ], electron.reload);
 });
 
