@@ -100,16 +100,22 @@ gulp.task('build:html', function() {
     .pipe(gulp.dest(conf.paths.dist));
 });
 
+gulp.task('build:style', function() {
+  return gulp.src(conf.paths.src + "/index.less")
+    .pipe($.less())
+    .pipe($.cssmin())
+    .pipe(gulp.dest(conf.paths.dist));
+});
+
 gulp.task('build:electron', ['transpile:electron'], function() {
-  return gulp.src([
-    conf.paths.serve + "/**/*.js"
-  ])
+  return gulp.src(conf.paths.serve + "/**/*.js")
     .pipe($.uglify({ preserveComments: uglifySaveLicense }))
     .pipe(gulp.dest(conf.paths.dist));
 });
 
 gulp.task('build', [
   'build:html',
+  'build:style',
   'build:electron',
   'build:bundle:sfx',
   'build:packageJson'

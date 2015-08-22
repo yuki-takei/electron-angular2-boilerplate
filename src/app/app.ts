@@ -1,7 +1,6 @@
 import 'reflect-metadata';
 import 'es6-shim';
 import 'zone.js';
-import 'less';
 
 import {Component, View, bootstrap} from 'angular2/angular2';
 
