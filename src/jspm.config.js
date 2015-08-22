@@ -33,8 +33,8 @@ System.config({
     "es6-shim": "github:es-shims/es6-shim@0.33.1",
     "less": "github:aaike/jspm-less-plugin@0.0.5",
     "reflect-metadata": "npm:reflect-metadata@0.1.0",
-    "typescript": "npm:typescript@1.6.0-dev.20150821",
-    "zone.js": "npm:zone.js@0.5.2",
+    "typescript": "npm:typescript@1.6.0-dev.20150822",
+    "zone.js": "npm:zone.js@0.5.3",
     "github:aaike/jspm-less-plugin@0.0.5": {
       "less.js": "github:distros/less@2.4.0"
     },
@@ -42,7 +42,7 @@ System.config({
       "assert": "npm:assert@1.3.0"
     },
     "github:jspm/nodelibs-buffer@0.1.0": {
-      "buffer": "npm:buffer@3.4.2"
+      "buffer": "npm:buffer@3.4.3"
     },
     "github:jspm/nodelibs-constants@0.1.0": {
       "constants-browserify": "npm:constants-browserify@0.0.1"
@@ -102,7 +102,7 @@ System.config({
       "reflect-metadata": "npm:reflect-metadata@0.1.0",
       "rx": "npm:rx@2.5.1",
       "url": "github:jspm/nodelibs-url@0.1.0",
-      "zone.js": "npm:zone.js@0.5.2"
+      "zone.js": "npm:zone.js@0.5.3"
     },
     "npm:asn1.js@2.2.0": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
@@ -148,7 +148,7 @@ System.config({
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
-    "npm:buffer@3.4.2": {
+    "npm:buffer@3.4.3": {
       "base64-js": "npm:base64-js@0.0.8",
       "ieee754": "npm:ieee754@1.1.6",
       "is-array": "npm:is-array@1.0.1"
@@ -323,7 +323,7 @@ System.config({
     "npm:string_decoder@0.10.31": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
-    "npm:typescript@1.6.0-dev.20150821": {
+    "npm:typescript@1.6.0-dev.20150822": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
@@ -345,7 +345,7 @@ System.config({
     "npm:vm-browserify@0.0.4": {
       "indexof": "npm:indexof@0.0.1"
     },
-    "npm:zone.js@0.5.2": {
+    "npm:zone.js@0.5.3": {
       "process": "github:jspm/nodelibs-process@0.1.1"
     }
   }

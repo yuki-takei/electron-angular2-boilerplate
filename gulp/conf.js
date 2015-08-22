@@ -16,7 +16,9 @@ exports.paths = {
 };
 
 exports.files = {
-  electronMain: 'main.js'
+  electronMain: 'main.js',
+  indexFileDev: this.paths.src + '/index.dev.html',
+  indexFile: this.paths.src + '/index.html'
 }
 
 /**
