@@ -22,9 +22,10 @@ Getting Started
 
 ```
 $ cd /path/to/local_repos
-$ npm install -g gulp jspm
+$ npm install -g gulp jspm dtsm
 $ npm install
 $ jspm install
+$ dtsm install
 ```
 
 ## Run at local
