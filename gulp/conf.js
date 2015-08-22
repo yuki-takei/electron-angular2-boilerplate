@@ -9,6 +9,7 @@ exports.meta = {
 exports.paths = {
   src: 'src',
   srcElectron: 'src-electron',
+  tmp: '.tmp',
   serve: '.tmp/serve',
   dist: '.tmp/dist',
   release: 'release'

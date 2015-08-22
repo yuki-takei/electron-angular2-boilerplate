@@ -5,7 +5,6 @@ var $ = require('gulp-load-plugins')();
 var _ = require('lodash');
 var conf = require('./conf');
 var path = require('path');
-var del = require('del');
 var fs = require('fs');
 var uglifySaveLicense = require('uglify-save-license');
 
@@ -44,13 +43,6 @@ gulp.task('transpile:electron', function () {
 //     .pipe(gulp.dest(conf.paths.dist + '/fonts'))
 //   ;
 // });
-
-// Delete generated directories.
-gulp.task('clean', function (done) {
-  del([conf.paths.tmp, conf.paths.release], function () {
-    done();
-  });
-});
 
 gulp.task('serve', ['transpile:electron'], function () {
   // switch the pathToApp for BrowserWindow.loadUrl(url) according to the value of NODE_ENV
