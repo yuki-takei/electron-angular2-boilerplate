@@ -6,6 +6,10 @@ exports.meta = {
   electronVersion: '0.30.5'
 }
 
+exports.variables = {
+  isMinify: false
+}
+
 exports.paths = {
   src: 'src',
   srcElectron: 'src-electron',

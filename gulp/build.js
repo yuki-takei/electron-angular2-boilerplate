@@ -5,6 +5,7 @@ var $ = require('gulp-load-plugins')();
 var _ = require('lodash');
 var conf = require('./conf');
 var fs = require('fs');
+var jspm = require('jspm');
 var uglifySaveLicense = require('uglify-save-license');
 
 var packageJson = require('../package.json');
@@ -46,9 +47,23 @@ gulp.task('build:packageJson', [], function (done) {
   });
 });
 
-gulp.task('build:bundle:sfx', $.shell.task([
-  'jspm bundle-sfx ' + paths.jspmBundleTargetModule + ' ' + paths.jspmBundleOutFile + ' --skip-source-maps --minify'
-]));
+gulp.task('build:jspm:bundle-sfx', function() {
+  var builder = new jspm.Builder();
+  builder.loadConfig(conf.paths.src + '/jspm.config.js');
+  var option = {
+    skipSourceMaps: true,
+    minify: conf.variables.isMinify
+  };
+
+  // log
+  $.util.log("Building the single-file sfx bundle"
+    + "\n  target modules: " + paths.jspmBundleTargetModule
+    + "\n  out file: " + paths.jspmBundleOutFile
+    + "\n  option: " + JSON.stringify(option)
+  );
+
+  return builder.buildSFX(paths.jspmBundleTargetModule, paths.jspmBundleOutFile, option);
+});
 
 gulp.task('build:html', function() {
   return gulp.src([
@@ -83,6 +98,6 @@ gulp.task('build', [
   'build:html',
   'build:style',
   'build:electron',
-  'build:bundle:sfx',
+  'build:jspm:bundle-sfx',
   'build:packageJson'
 ]);

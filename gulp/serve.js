@@ -34,7 +34,7 @@ gulp.task('serve:dist', ['build'], function() {
   gulp.watch([
     conf.paths.src + '/*.ts',
     conf.paths.src + '/!(jspm_packages)/**/*.ts'
-  ], ['build:bundle:sfx']);
+  ], ['build:jspm:bundle-sfx']);
   gulp.watch([
     conf.paths.src + '/*.html',
     conf.paths.src + '/!(jspm_packages)/**/*.html'
