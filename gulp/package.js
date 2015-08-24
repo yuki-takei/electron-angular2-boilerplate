@@ -24,7 +24,7 @@ var uglifySaveLicense = require('uglify-save-license');
  * @see https://github.com/Quramy/electron-jsx-babel-boilerplate/issues/3
  */
 // Minify dependent modules.
-gulp.task('package:electron:dependencies', function () {
+gulp.task('package:deps-for-electron', function () {
   var streams = [], dependencies = [];
   var defaultModules = ['assert', 'buffer', 'console', 'constants', 'crypto', 'domain', 'events', 'http', 'https', 'os', 'path', 'punycode', 'querystring', 'stream', 'string_decoder', 'timers', 'tty', 'url', 'util', 'vm', 'zlib'],
       electronModules = ['app', 'auto-updater', 'browser-window', 'content-tracing', 'dialog', 'global-shortcut', 'ipc', 'menu', 'menu-item', 'power-monitor', 'protocol', 'tray', 'remote', 'web-frame', 'clipboard', 'crash-reporter', 'native-image', 'screen', 'shell'];
@@ -135,7 +135,7 @@ gulp.task('package', function(done) {
 
   runSequence(
     'clean',
-    ['package:build:electron', 'package:build:packageJson', 'build'],
+    ['package:build:electron', 'package:build:packageJson', 'package:deps-for-electron', 'build'],
     'package:each-platforms',
     done
   );
