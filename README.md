@@ -8,6 +8,22 @@ electron-angular2-boilerplate
 
 *!! This Project is under constructing !!*
 
+
+Features
+--------
+
+* Electron
+  * ES6
+* Angular2
+  * Typescript
+* Bootstrap3
+* LESS
+  * dev: with less.js
+  * prod: compiled to css
+* LiveReload
+* Package Electron App
+
+
 Requirements
 ------------
 
@@ -15,10 +31,10 @@ Requirements
 (confirmed to work with v0.12.7)
 
 
-Getting Started
----------------
+Usage
+------
 
-## Install dependencies
+### Install dependencies
 
 ```
 $ cd /path/to/local_repos
@@ -27,13 +43,13 @@ $ npm install
 $ jspm install
 ```
 
-## Install DefinitelyTyped files
+### Install DefinitelyTyped files
 
 ```
 $ dtsm install
 ```
 
-## Run at local
+### Run at local
 
 ```
 ## provides a http server that hosts an angular app run by JSPM
@@ -46,11 +62,29 @@ $ gulp serve:electron
 $ gulp serve:dist:electron
 ```
 
-## Release
+### Release
 
+```
+$ gulp package
+```
 
-Overview
----------
+Directory Structure
+-------------------
+
+```
+/
+├── .tmp
+│   ├── dist              # location for compiled Angular2 App files
+│   ├── typings           # location for DefinitelyTyped files
+│   └── serve             # location for compiled Electron App files
+├── gulp                  # gulp tasks
+├── src                   # Angular2 Application src dir
+│   ├── app               # main module for Angular2 Application
+│   ├── index.dev.html    # entry point (development)
+│   ├── index.html        # entry point (production)
+│   ├── jspm.config.js    # JSPM config file
+└── src-electron          # Electron Application src dir
+```
 
 
 Contributing
