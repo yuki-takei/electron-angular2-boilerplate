@@ -52,7 +52,7 @@ gulp.task('build:jspm:bundle-sfx', function() {
   builder.loadConfig(conf.paths.src + '/jspm.config.js');
   var option = {
     skipSourceMaps: true,
-    minify: conf.variables.isMinify
+    minify: process.env.JSPM_SFXOPTS_MINIFY: false
   };
 
   // log

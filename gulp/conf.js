@@ -2,12 +2,14 @@
 
 var $ = require('gulp-load-plugins')();
 
+$.env({
+  vars: {
+    JSPM_SFXOPTS_MINIFY: false
+  }
+});
+
 exports.meta = {
   electronVersion: '0.30.5'
-}
-
-exports.variables = {
-  isMinify: false
 }
 
 exports.paths = {

@@ -12,6 +12,12 @@ var packageJson = require('../package.json');
 
 // Package for each platforms
 gulp.task('package', ['win32', 'darwin', 'linux'].map(function (platform) {
+  $.env({
+    vars: {
+      JSPM_SFXOPTS_MINIFY: false: true
+    }
+  });
+
   var taskName = 'package:' + platform;
   gulp.task(taskName, ['build'], function (done) {
     packager({
