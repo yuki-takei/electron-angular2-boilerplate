@@ -3,6 +3,7 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var _ = require('lodash');
+var path = require('path');
 var conf = require('./conf');
 var jspm = require('jspm');
 
@@ -41,23 +42,15 @@ gulp.task('transpile:electron', function () {
 /**
  * create Self-Executing (SFX) Bundles
  */
-gulp.task('build:jspm:bundle-sfx', function() {
-  var builder = new jspm.Builder();
-  builder.loadConfig(conf.paths.src + '/jspm.config.js');
-  var option = {
-    skipSourceMaps: process.env.JSPM_SFXOPTS_SKIP_SOURCE_MAPS,
-    minify: process.env.JSPM_SFXOPTS_MINIFY
-  };
-
-  // log
-  $.util.log("Building the single-file sfx bundle"
-    + "\n  target modules: " + paths.jspmBundleTargetModule
-    + "\n  out file: " + paths.jspmBundleOutFile
-    + "\n  option: " + JSON.stringify(option)
-  );
-
-  return builder.buildSFX(paths.jspmBundleTargetModule, paths.jspmBundleOutFile, option);
-});
+gulp.task('build:jspm:bundle-sfx', $.shell.task([
+  // create command string with array.join()
+  ['jspm bundle-sfx',
+    paths.jspmBundleTargetModule,
+    paths.jspmBundleOutFile,
+    (process.env.JSPM_SFXOPTS_SKIP_SOURCE_MAPS == true) ? '--skip-source-maps --minify' : '',
+    (process.env.JSPM_SFXOPTS_MINIFY == true) ? '--minify' : ''
+  ].join(' ')
+]));
 
 /**
  * build, minify and locate html files

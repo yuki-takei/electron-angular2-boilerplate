@@ -124,7 +124,7 @@ gulp.task('package:each-platforms', ['win32', 'darwin', 'linux'].map(function (p
   return taskName;
 }));
 
-gulp.task('package', ['clean'], function(done) {
+gulp.task('package', function(done) {
   // set minify flag true
   $.env({
     vars: {
@@ -134,6 +134,7 @@ gulp.task('package', ['clean'], function(done) {
   });
 
   runSequence(
+    'clean',
     ['package:build:electron', 'package:build:packageJson', 'build'],
     'package:each-platforms',
     done
