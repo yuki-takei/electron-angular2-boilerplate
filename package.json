@@ -6,10 +6,13 @@
   "license": "Apache-2.0",
   "keywords": [
     "angular2",
-    "electron",
-    "jspm",
+    "babel",
     "dtsm",
-    "less"
+    "electron",
+    "es6",
+    "jspm",
+    "less",
+    "typescript"
   ],
   "dependencies": {
     "log4js": "~0.6.0"
