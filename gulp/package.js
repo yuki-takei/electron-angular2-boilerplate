@@ -6,13 +6,77 @@ var _ = require('lodash');
 var conf = require('./conf');
 var path = require('path');
 var fs = require('fs');
-var uglifySaveLicense = require('uglify-save-license');
 
-var runSequence = require('run-sequence');
+var browserify = require('browserify');
+var merge = require('merge2');
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
+var packageJson = require('../package.json');
 
 var packager = require('electron-packager');
+var runSequence = require('run-sequence');
+var uglifySaveLicense = require('uglify-save-license');
 
-var packageJson = require('../package.json');
+
+/**
+ * @see https://github.com/Quramy/electron-jsx-babel-boilerplate
+ * @see https://github.com/Quramy/electron-jsx-babel-boilerplate/issues/3
+ */
+// Minify dependent modules.
+gulp.task('package:electron:dependencies', function () {
+  var streams = [], dependencies = [];
+  var defaultModules = ['assert', 'buffer', 'console', 'constants', 'crypto', 'domain', 'events', 'http', 'https', 'os', 'path', 'punycode', 'querystring', 'stream', 'string_decoder', 'timers', 'tty', 'url', 'util', 'vm', 'zlib'],
+      electronModules = ['app', 'auto-updater', 'browser-window', 'content-tracing', 'dialog', 'global-shortcut', 'ipc', 'menu', 'menu-item', 'power-monitor', 'protocol', 'tray', 'remote', 'web-frame', 'clipboard', 'crash-reporter', 'native-image', 'screen', 'shell'];
+
+  // Because Electron's node integration, bundle files don't need to include browser-specific shim.
+  var excludeModules = defaultModules.concat(electronModules);
+
+  for(var name in packageJson.dependencies) {
+    dependencies.push(name);
+  }
+
+  // create a list of dependencies' main files
+  var modules = dependencies.map(function(dep) {
+    var packageJson = require(dep + '/package.json');
+    var main;
+    if (!packageJson.main) {
+      main = ['index.js'];
+    } else if (Array.isArray(packageJson.main)) {
+      main = packageJson.main;
+    } else{
+      main = [packageJson.main];
+    }
+    return {name: dep, main: main};
+  });
+
+  // add babel/polyfill module
+  modules.push({name: 'babel', main: ['polyfill.js']});
+
+  // create bundle file and minify for each main files
+  modules.forEach(function (it) {
+    it.main.forEach(function (entry) {
+      var b = browserify('node_modules/' + it.name + '/' + entry, {
+        detectGlobal: false,
+        standalone: path.basename(it.name)
+      });
+      excludeModules.forEach(function (moduleName) {b.exclude(moduleName)});
+      streams.push(b.bundle()
+        .pipe(source(entry))
+        .pipe(buffer())
+        .pipe($.uglify())
+        .pipe(gulp.dest(conf.paths.dist + '/node_modules/' + it.name))
+      );
+    });
+    streams.push(
+      // copy modules' package.json
+      gulp.src('node_modules/' + it.name + '/package.json')
+        .pipe(gulp.dest(conf.paths.dist + '/node_modules/' + it.name))
+    );
+  });
+
+  return merge(streams);
+});
 
 /**
  * locate js files
@@ -31,9 +95,11 @@ gulp.task('package:build:electron', ['transpile:electron'], function() {
  * 	src: package.json
  * 	dest: dist dir
  */
-gulp.task('package:build:packageJson', [], function (done) {
+gulp.task('package:build:packageJson', function (done) {
   var json = _.cloneDeep(packageJson);
   json.main = conf.files.electronMain;
+  json.devDependencies = {};
+  json.jspm = {};
   fs.writeFile(conf.paths.dist + '/package.json', JSON.stringify(json), function (err) {
     done();
   });
