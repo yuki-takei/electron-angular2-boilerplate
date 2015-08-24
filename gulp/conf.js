@@ -4,6 +4,7 @@ var $ = require('gulp-load-plugins')();
 
 $.env({
   vars: {
+    JSPM_SFXOPTS_SKIP_SOURCE_MAPS: false,
     JSPM_SFXOPTS_MINIFY: false
   }
 });

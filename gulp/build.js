@@ -4,11 +4,7 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var _ = require('lodash');
 var conf = require('./conf');
-var fs = require('fs');
 var jspm = require('jspm');
-var uglifySaveLicense = require('uglify-save-license');
-
-var packageJson = require('../package.json');
 
 
 /*
@@ -20,7 +16,11 @@ var paths = {
 }
 
 
-// Compile scripts for distribution
+/**
+ * Transpile scripts for Electron
+ * 	src: js(es6) files for Electron
+ * 	dest: serve dir
+ */
 gulp.task('transpile:electron', function () {
   return gulp.src(conf.paths.srcElectron + "/**/*.js")
     .pipe($.plumber(conf.errorHandler))
@@ -38,20 +38,14 @@ gulp.task('transpile:electron', function () {
 // });
 
 
-// Write a package.json for distribution
-gulp.task('build:packageJson', [], function (done) {
-  var json = _.cloneDeep(packageJson);
-  json.main = conf.files.electronMain;
-  fs.writeFile(conf.paths.dist + '/package.json', JSON.stringify(json), function (err) {
-    done();
-  });
-});
-
+/**
+ * create Self-Executing (SFX) Bundles
+ */
 gulp.task('build:jspm:bundle-sfx', function() {
   var builder = new jspm.Builder();
   builder.loadConfig(conf.paths.src + '/jspm.config.js');
   var option = {
-    skipSourceMaps: true,
+    skipSourceMaps: process.env.JSPM_SFXOPTS_SKIP_SOURCE_MAPS,
     minify: process.env.JSPM_SFXOPTS_MINIFY
   };
 
@@ -65,6 +59,11 @@ gulp.task('build:jspm:bundle-sfx', function() {
   return builder.buildSFX(paths.jspmBundleTargetModule, paths.jspmBundleOutFile, option);
 });
 
+/**
+ * build, minify and locate html files
+ * 	src: html files for application
+ * 	dest: dist dir
+ */
 gulp.task('build:html', function() {
   return gulp.src([
     // select all html files
@@ -72,6 +71,7 @@ gulp.task('build:html', function() {
     // exclude
     "!" + conf.files.indexFileDev
   ])
+    .pipe($.plumber(conf.errorHandler))
     .pipe($.minifyHtml({
       empty: true,
       spare: true,
@@ -81,23 +81,21 @@ gulp.task('build:html', function() {
     .pipe(gulp.dest(conf.paths.dist));
 });
 
+/**
+ * build, minify and locate style files
+ * 	src: less for application
+ * 	dest: dist dir
+ */
 gulp.task('build:style', function() {
   return gulp.src(conf.paths.src + "/index.less")
+    .pipe($.plumber(conf.errorHandler))
     .pipe($.less())
     .pipe($.cssmin())
-    .pipe(gulp.dest(conf.paths.dist));
-});
-
-gulp.task('build:electron', ['transpile:electron'], function() {
-  return gulp.src(conf.paths.serve + "/**/*.js")
-    .pipe($.uglify({ preserveComments: uglifySaveLicense }))
     .pipe(gulp.dest(conf.paths.dist));
 });
 
 gulp.task('build', [
   'build:html',
   'build:style',
-  'build:electron',
-  'build:jspm:bundle-sfx',
-  'build:packageJson'
+  'build:jspm:bundle-sfx'
 ]);
