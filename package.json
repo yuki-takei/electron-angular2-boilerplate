@@ -4,6 +4,13 @@
   "description": "Electron app boilerplate using gulp, jspm, and Angular 2",
   "author": "Yuki Takei <yuki@weseek.co.jp>",
   "license": "Apache-2.0",
+  "keywords": [
+    "angular2",
+    "electron",
+    "jspm",
+    "dtsm",
+    "less"
+  ],
   "dependencies": {
     "log4js": "~0.6.0"
   },
