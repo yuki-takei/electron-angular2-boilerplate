@@ -6,8 +6,6 @@
 electron-angular2-boilerplate
 =============================
 
-*!! This Project is under constructing !!*
-
 
 Features
 --------
@@ -17,11 +15,13 @@ Features
 * Angular2
   * Typescript
 * Bootstrap3
-* LESS
-  * dev: with less.js
-  * prod: compiled to css
+* LESS (with less.js when developing)
 * LiveReload
-* Package Electron App
+* compile and minify for production
+  * Electron: Babel and Browserify
+  * Angular2: JSPM
+  * LESS to CSS
+* package for Windows, Mac OSX, and Linux
 
 
 Requirements
