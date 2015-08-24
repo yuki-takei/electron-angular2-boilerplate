@@ -18,6 +18,15 @@ var packager = require('electron-packager');
 var runSequence = require('run-sequence');
 var uglifySaveLicense = require('uglify-save-license');
 
+/**
+ * return modules information that you wants to add partially
+ */
+function getAdditionalModules() {
+  return [
+    // {name: 'modules name', main: ['additional files']},
+    {name: 'babel', main: ['polyfill.js']}    // babel/polyfill
+  ]
+}
 
 /**
  * @see https://github.com/Quramy/electron-jsx-babel-boilerplate
@@ -50,8 +59,10 @@ gulp.task('package:deps-for-electron', function () {
     return {name: dep, main: main};
   });
 
-  // add babel/polyfill module
-  modules.push({name: 'babel', main: ['polyfill.js']});
+  // add additional modules
+  getAdditionalModules().forEach(function(it) {
+    modules.push(it);
+  })
 
   // create bundle file and minify for each main files
   modules.forEach(function (it) {
