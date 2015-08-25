@@ -47,7 +47,7 @@ gulp.task('build:jspm:bundle-sfx', $.shell.task([
   ['jspm bundle-sfx',
     paths.jspmBundleTargetModule,
     paths.jspmBundleOutFile,
-    (process.env.JSPM_SFXOPTS_SKIP_SOURCE_MAPS == true) ? '--skip-source-maps --minify' : '',
+    (process.env.JSPM_SFXOPTS_SKIP_SOURCE_MAPS == true) ? '--skip-source-maps' : '',
     (process.env.JSPM_SFXOPTS_MINIFY == true) ? '--minify' : ''
   ].join(' ')
 ]));
