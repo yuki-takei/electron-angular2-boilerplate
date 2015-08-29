@@ -91,6 +91,10 @@ Directory Structure
 └── src-electron          # Electron Application src dir
 ```
 
+Note
+-----
+
+A boilerplate with AngularJS 1.x ver is [here](https://github.com/yuki-takei/electron-angular-boilerplate).
 
 Contributing
 ------------
