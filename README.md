@@ -39,8 +39,7 @@ Usage
 ```
 $ cd /path/to/local_repos
 $ npm install -g gulp jspm dtsm
-$ npm install
-$ jspm install
+$ npm run update (npm install && jspm install)
 ```
 
 ### Install DefinitelyTyped files
