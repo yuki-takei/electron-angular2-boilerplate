@@ -14,6 +14,9 @@
     "less",
     "typescript"
   ],
+  "scripts": {
+	  "update": "npm install && jspm install"
+  },
   "dependencies": {
     "log4js": "~0.6.0"
   },
